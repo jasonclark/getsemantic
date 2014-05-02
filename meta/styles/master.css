@@ -32,6 +32,8 @@ a:hover::after {height: 2px;opacity: 1;-webkit-transform: translateY(-3px);-moz-
 .button:active {position:relative;top:1px;}
 input{border:none;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 4px #666 inset;-moz-box-shadow:0 0 4px #666 inset;box-shadow:0 0 4px #666 inset;height:45px;line-height:45px;width:60%;text-indent:5px;}
 input:focus,button:focus{outline:none;}
+.expand {background:url("../img/expand.gif") 0 50% no-repeat;padding-left:16px;}
+.refresh {background:url("../img/refresh.gif") 0 50% no-repeat;padding-left:18px;}
 @media screen and (max-width:768px) {
  body{padding:20px;}
  h1{font-size:40px;}
