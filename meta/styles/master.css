@@ -1,0 +1,43 @@
+/*Styles for code demos and template
+Author:   Jason A. Clark
+Version:  screen,projection,handheld - May 2013
+----------------------------------------------- */
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0;}
+a{outline:none;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none;display:inline-block;color:#777;position:relative;margin:0;padding:0;}
+body{font-size:small;font:20px/1.6 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;max-width:720px;position:relative;padding:50px;}
+select,input,button,textarea{font:99% Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+fieldset{border:0;}
+label{display:none;}
+table{font-size:inherit;font:100%;}
+pre,code,kbd,samp,tt{font-family:monospace;font-size:108%;line-height:100%;}
+*,:before,:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0;}
+html{background:url("../img/robot-bg.png") no-repeat fixed bottom;background-size:cover;color:#666;}
+html ul{margin:1em 0;padding:0 0 0 40px;}
+header{display:block;float:left;width:100%;}
+main{display:block;float:left;width:100%;min-height:320px;}
+aside{display:block;float:left;left:0;bottom:0;height:auto;width:100%;border-top:2px solid #fff;margin:1rem 0 0;padding:1rem 0 0;}
+h1{font-weight:700;font-size:50px;line-height:1;color:#777;margin:1rem 0 0;}
+h2{font-weight:400;font-size:40px;text-transform:none;line-height:1;word-spacing:8px;margin:0 0 2rem;padding:0;}
+h3{display:inline;font-weight:700;font-size:20px;}
+p{margin:1rem 0;}
+a:hover{color::#4a4;}
+aside a{margin:0 .25rem;padding:0 .25rem;}
+a:hover.twitter{color:#00acee;}
+a::after {position: absolute;top: 100%;left: 0;width: 100%;height: 1px;background: rgb(245,250,255);content: '';opacity: 0;-webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;-moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;transition: height 0.3s, opacity 0.3s, transform 0.3s;-webkit-transform: translateY(-13px);-moz-transform: translateY(-13px);transform: translateY(-13px);}
+a:hover::after {height: 2px;opacity: 1;-webkit-transform: translateY(-3px);-moz-transform: translateY(-3px);transform: translateY(-3px);}
+.button {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#79bbff", endColorstr="#378de5");background-color:#79bbff;-webkit-border-top-left-radius:13px;-moz-border-radius-topleft:13px;border-top-left-radius:13px;-webkit-border-top-right-radius:13px;-moz-border-radius-topright:13px;border-top-right-radius:13px;-webkit-border-bottom-right-radius:13px;-moz-border-radius-bottomright:13px;border-bottom-right-radius:13px;-webkit-border-bottom-left-radius:13px;-moz-border-radius-bottomleft:13px;border-bottom-left-radius:13px;text-indent:0;border:1px solid #84bbf3;display:inline-block;color:#fff;height:45px;line-height:45px;width:131px;text-decoration:none;text-align:center;}
+.button:hover {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#378de5", endColorstr="#79bbff");background-color:#378de5;}
+.button:active {position:relative;top:1px;}
+input{border:none;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 4px #666 inset;-moz-box-shadow:0 0 4px #666 inset;box-shadow:0 0 4px #666 inset;height:45px;line-height:45px;width:60%;text-indent:5px;}
+input:focus,button:focus{outline:none;}
+@media screen and (max-width:768px) {
+ body{padding:20px;}
+ h1{font-size:40px;}
+ h2{font-size:30px;line-height:1.2;}
+ main{min-height:250px;}
+ aside h3,aside a{display:block;}
+ aside{border:none;}
+ aside a{border-top:1px solid #fff;margin:0;padding:.25rem 0;}
+}
