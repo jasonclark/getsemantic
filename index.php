@@ -43,11 +43,11 @@ if ($customScript[0] != 'none') {
 <div class="main">
 <main>
 <?php
-  //turn on full error reports for development purposes - should be turned off for production environment
-  error_reporting(E_ALL);
+  //turn on full error reports for development - REMOVE when in production
+  //error_reporting(E_ALL);
 
 	//set default value for developer key
-	$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'YOUR-ALCHEMY-API-KEY-HERE';
+	$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'fb3c6b13855b1b894ddd969da8a007b520bf53a0';
   //set base url for API
   $alchemyBase = 'http://access.alchemyapi.com/calls/url/';
   //set default value for type of query
@@ -76,20 +76,20 @@ else: //query API and display results
   //build request value
 	$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$rawQuery.'';
 
-    //for testing purposes show actual request to API - REMOVE when finished
-    echo '<!--'.$apiURL.'-->';
+  //diagnostic to show actual API request - REMOVE when in production
+  //echo '<!--'.$apiURL.'-->';
 
-    //call API and get data
-    $request = file_get_contents($apiURL);
-    //create json object(s) out of response from API; set to "true" to turn response into an array
-    $data = json_decode($request,true);
+  //call API and get data
+  $request = file_get_contents($apiURL);
+  //create json object(s) out of API response; set to "true" to turn response into an array
+  $data = json_decode($request,true);
 
+	//diagnostic to show array returned from API request - REMOVE when in production
 	//echo '<pre>';
 	//print_r(var_dump($data));
 	//echo '</pre>';
-	//echo '<pre>'.var_dump($data).'</pre>';
 
-    //parse xml elements and display as html
+    //parse elements and display as html
     if ($data['status'] == 'OK') {
     echo '<h2 class="mainHeading">Mmmmm... Semantic Yumminess</h2>'."\n";
     	//if (!is_null($data->entities)) {
@@ -98,25 +98,32 @@ else: //query API and display results
 			foreach ($data['entities'] as $entity) {
         	echo '<p><strong>'.$entity['text'].'</strong></p>'."\n";
 					echo '<ul>'."\n";
-        	echo '<li>type: '.$entity['type'].'</li>'."\n";
+					//check for URL at schema.org; print link if URL exists
+					$schemaType = 'http://schema.org/'.$entity['type'];
+					if (@file_get_contents($schemaType)) {
+						echo '<li>type: <a title="look up '.$entity['type'].' type at schema.org" href="http://schema.org/'.$entity['type'].'">'.$entity['type'].'</a></li>'."\n";
+					} else {
+						echo '<li>type: '.$entity['type'].'</li>'."\n";
+					}
+        	echo '<li>relevance: '.$entity['relevance'].'</li>'."\n";
         	echo '<li>count: '.$entity['count'].'</li>'."\n";
 					if (isset($entity['disambiguated'])) {
-        			echo '<li>linked data resources:'."\n";
-        			echo '<ul>'."\n";
-							echo '<li><a href="'.$entity['disambiguated']['dbpedia'].'">'.$entity['disambiguated']['dbpedia'].'</a></li>'."\n";
-							echo '<li><a href="'.$entity['disambiguated']['freebase'].'">'.$entity['disambiguated']['freebase'].'</a></li>'."\n";
-        			echo '</ul>'."\n";
-        			echo '</li>'."\n";
+        		echo '<li>linked data resources:'."\n";
+        		echo '<ul>'."\n";
+						echo '<li><a href="'.$entity['disambiguated']['dbpedia'].'">'.$entity['disambiguated']['dbpedia'].'</a></li>'."\n";
+						echo '<li><a href="'.$entity['disambiguated']['freebase'].'">'.$entity['disambiguated']['freebase'].'</a></li>'."\n";
+        		echo '</ul>'."\n";
+        		echo '</li>'."\n";
     			}
 					echo '</ul>'."\n";
 			}
 		}
 		echo '<p>Source:</p>'."\n";
-		echo '<p>'.stripslashes(urldecode(htmlentities($rawQuery))).'</p>'."\n";
-		echo '<p class="control"><a href="'.strip_tags(htmlentities(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
+		echo '<p><a href="'.htmlentities(strip_tags($rawQuery)).'">'.htmlentities(strip_tags($rawQuery)).'</a></p>'."\n";
+		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	} else {
 		echo '<h2 class="mainHeading">Bummer. Empty Belly... <br />No results for <strong>'.$rawQuery.'</strong>.</h2>'."\n";
-    echo '<p class="control"><a href="'.strip_tags(htmlentities(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
+    echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	}
 //end submit isset if statement on line 73
 endif;
