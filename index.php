@@ -35,13 +35,13 @@ if ($customScript[0] != 'none') {
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>
-<body class="<?php if(!isset($_GET['view'])) { echo 'home'; } else { echo $_GET['view']; } ?>">
-<header>
+<body class="<?php if(!isset($_GET['view'])) { echo 'home'; } else { echo $_GET['view']; } ?>" role="document" vocab="http://schema.org/" typeof="WebPage">
+<header role="banner" property="name description">
 <h1><?php echo($pageTitle); ?></h1>
 <h2><?php echo($subTitle); ?></h2>
 </header>
 <div class="main">
-<main>
+<main role="main">
 <?php
   //turn on full error reports for development - REMOVE when in production
   //error_reporting(E_ALL);
@@ -130,7 +130,7 @@ endif;
 ?>
 </main>
 </div><!--end .main div-->
-<aside>
+<aside role="complementary">
 	<h3>Key:</h3>
 	<a href="./index.php">Demo App</a>
 	<a href="./what.php">What is this?</a>
