@@ -44,6 +44,7 @@ if ($customScript[0] != 'none') {
 <main>
 <p>Source code here is from the app that shows the top entities and linked data sources extracted from a given URL. Built with PHP, HTML/CSS, and Alchemy Content Analysis API.</p>
 <p><a href="code.txt" title="code for search form and php">Search form and PHP</a></p>
+<p><a href="https://github.com/jasonclark/getsemantic" title="Full GitHub repo for getSEMantic">Full GitHub repo for getSEMantic</a></p>
 </main>
 </div><!--end .main div-->
 <aside>
