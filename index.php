@@ -53,19 +53,19 @@ if ($customScript[0] != 'none') {
   //set default value for type of query
   $type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedNamedEntities';
   //set default value for query
-  $rawQuery = isset($_POST['raw-query']) ? htmlentities(strip_tags($_POST['raw-query'])) : null;
+  $q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
 	//set default value for output format
 	$format = isset($_GET['format']) ? $_GET['format'] : 'json';
 	//set default number of results
 	//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
 
-if (is_null($rawQuery)): //if there's no query, show form and allow the user to search
+if (is_null($q)): //if there's no query, show form and allow the user to search
 ?>
 
-	<form method="post" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
+	<form method="get" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
 	<fieldset>
-	<label for="raw-query">Enter URL to get Content Analysis and Terms:</label>
-	<input type="text" name="raw-query" id="raw-query" placeholder="Feed me a URL"></input>
+	<label for="q">Enter URL to get Content Analysis and Terms:</label>
+	<input type="text" name="q" id="q" placeholder="Feed me a URL"></input>
 	<button type="submit" class="button">Get Analysis</button>
 	</fieldset>
 	</form>
@@ -74,7 +74,7 @@ if (is_null($rawQuery)): //if there's no query, show form and allow the user to 
 else: //query API and display results
 
   //build request value
-	$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$rawQuery.'';
+	$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
 
   //diagnostic to show actual API request - REMOVE when in production
   //echo '<!--'.$apiURL.'-->';
@@ -118,11 +118,11 @@ else: //query API and display results
 					echo '</ul>'."\n";
 			}
 		}
-		echo '<p>Source:</p>'."\n";
-		echo '<p><a href="'.htmlentities(strip_tags($rawQuery)).'">'.htmlentities(strip_tags($rawQuery)).'</a></p>'."\n";
+		echo '<p><a href="http://'.$_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'">Permalink</a></p>'."\n";
+		echo '<p>Source: <a href="'.htmlentities(strip_tags($q)).'">'.htmlentities(strip_tags($q)).'</a></p>'."\n";
 		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	} else {
-		echo '<h2 class="mainHeading">Bummer. Empty Belly... <br />No results for <strong>'.$rawQuery.'</strong>.</h2>'."\n";
+		echo '<h2 class="mainHeading">Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</h2>'."\n";
     echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	}
 //end submit isset if statement on line 73
