@@ -16,9 +16,10 @@ $customScript[0] = 'none';
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<head>
 <title><?php echo($pageTitle); ?> - jason a. clark</title>
 <link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit" />
+<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+<link rel="icon" href="./favicon.ico" type="image/x-icon">
 <?php if ($customCSS != 'none') {
 ?>
 <link rel="stylesheet" href="<?php echo dirname($_SERVER['PHP_SELF']); ?>/meta/styles/<?php echo $customCSS; ?>">
@@ -65,7 +66,7 @@ if (is_null($q)): //if there's no query, show form and allow the user to search
 	<form method="get" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
 	<fieldset>
 	<label for="q">Enter URL to get Content Analysis and Terms:</label>
-	<input type="text" name="q" id="q" placeholder="Feed me a URL"></input>
+	<input type="text" name="q" id="q" placeholder="Feed me a URL" />
 	<button type="submit" class="button">Get Analysis</button>
 	</fieldset>
 	</form>
