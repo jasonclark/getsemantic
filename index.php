@@ -48,7 +48,7 @@ if ($customScript[0] != 'none') {
   //error_reporting(E_ALL);
 
 	//set default value for developer key
-	$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'fb3c6b13855b1b894ddd969da8a007b520bf53a0';
+	$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
   //set base url for API
   $alchemyBase = 'http://access.alchemyapi.com/calls/url/';
   //set default value for type of query
