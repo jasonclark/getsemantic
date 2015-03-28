@@ -66,7 +66,7 @@ if (is_null($q)): //if there's no query, show form and allow the user to search
 	<form method="get" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
 	<fieldset>
 	<label for="q">Enter URL to get Content Analysis and Terms:</label>
-	<input type="text" name="q" id="q" placeholder="Feed me a URL" />
+	<input type="text" name="q" id="q" placeholder="Feed me a URL" autofocus />
 	<button type="submit" class="button">Get Analysis</button>
 	</fieldset>
 	</form>
