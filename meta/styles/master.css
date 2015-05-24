@@ -1,6 +1,6 @@
 /*Styles for code demos and template
 Author:   Jason A. Clark
-Version:  screen,projection,handheld - May 2013
+Version:  screen,projection,handheld - May 2015
 ----------------------------------------------- */
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0;}
 a{outline:none;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none;display:inline-block;color:#777;position:relative;margin:0;padding:0;}
@@ -16,8 +16,8 @@ html ul{margin:1em 0;padding:0 0 0 40px;}
 header{display:block;float:left;width:100%;}
 main{display:block;float:left;width:100%;min-height:320px;}
 aside{display:block;float:left;left:0;bottom:0;height:auto;width:100%;border-top:2px solid #fff;margin:1rem 0 0;padding:1rem 0 0;}
-h1{font-weight:700;font-size:50px;line-height:1;color:#777;margin:1rem 0 0;}
-h2{font-weight:400;font-size:40px;text-transform:none;line-height:1;word-spacing:8px;margin:0 0 2rem;padding:0;}
+h1{font-weight:700;font-size:50px;line-height:1em;color:#777;margin:1rem 0 0;}
+h2{font-weight:400;font-size:40px;text-transform:none;line-height:1em;word-spacing:8px;margin:0 0 2rem;padding:0;}
 h3{display:inline;font-weight:700;font-size:20px;}
 p{margin:1rem 0;}
 a:hover{color::#4a4;}
@@ -30,6 +30,7 @@ a:hover::after {height: 2px;opacity: 1;-webkit-transform: translateY(-3px);-moz-
 .button:active {position:relative;top:1px;}
 input{border:none;border-radius:5px;-webkit-box-shadow:0 0 4px #666 inset;-moz-box-shadow:0 0 4px #666 inset;box-shadow:0 0 4px #666 inset;height:45px;line-height:25px;width:60%;text-indent:7px;}
 input:focus,button:focus{outline:none;}
+.hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
 .expand {background:url("../img/expand.gif") 0 50% no-repeat;padding-left:16px;}
 .refresh {background:url("../img/refresh.gif") 0 50% no-repeat;padding-left:18px;}
 
