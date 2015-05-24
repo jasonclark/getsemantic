@@ -22,6 +22,7 @@ $customScript[0] = 'none';
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 <?php if ($customCSS != 'none') {
 ?>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700">
 <link rel="stylesheet" href="<?php echo dirname($_SERVER['PHP_SELF']); ?>/meta/styles/<?php echo $customCSS; ?>">
 <?php
 }
@@ -48,34 +49,34 @@ if ($customScript[0] != 'none') {
   //error_reporting(E_ALL);
 
   //set default value for developer key
-  $key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
+  $key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'fb3c6b13855b1b894ddd969da8a007b520bf53a0';
   //set base url for API
   $alchemyBase = 'http://access.alchemyapi.com/calls/url/';
   //set default value for type of query
   $type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedNamedEntities';
   //set default value for query
   $q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
-  //set default value for output format
-  $format = isset($_GET['format']) ? $_GET['format'] : 'json';
-  //set default number of results
-  //$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
+	//set default value for output format
+	$format = isset($_GET['format']) ? $_GET['format'] : 'json';
+	//set default number of results
+	//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
 
 if (is_null($q)): //if there's no query, show form and allow the user to search
 ?>
 
-  <form method="get" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
-    <fieldset>
-    <label for="q">Enter URL to get Content Analysis and Terms:</label>
-    <input type="text" name="q" id="q" placeholder="Feed me a URL" autofocus />
-    <button type="submit" class="button">Get Analysis</button>
-    </fieldset>
-  </form>
+	<form method="get" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
+	<fieldset>
+	<label for="q">Enter URL to get Content Analysis and Terms:</label>
+	<input type="text" name="q" id="q" placeholder="Feed me a URL" autofocus />
+	<button type="submit" class="button">Get Analysis</button>
+	</fieldset>
+	</form>
 
 <?php
 else: //query API and display results
 
   //build request value
-  $apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
+	$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
 
   //diagnostic to show actual API request - REMOVE when in production
   //echo '<!--'.$apiURL.'-->';
@@ -96,7 +97,7 @@ else: //query API and display results
     	//if (!is_null($data->entities)) {
     	if (isset($data['entities'])) {
     	echo '<h3>Ranked Entities</h3>'."\n";
-		foreach ($data['entities'] as $entity) {
+			foreach ($data['entities'] as $entity) {
         	echo '<p><strong>'.$entity['text'].'</strong></p>'."\n";
 					echo '<ul>'."\n";
 					//check for URL at schema.org; print link if URL exists
@@ -132,12 +133,12 @@ endif;
 </main>
 </div><!--end .main div-->
 <aside role="complementary">
-  <h3>Key:</h3>
-  <a href="./index.php">Demo App</a>
-  <a href="./what.php">What is this?</a>
-  <a href="./code.php">View Code</a>
-  <a href="http://twitter.com/jaclark" class="twitter">@jaclark</a>
-  <a title="Robot Joe by Simon Abrams (CC BY-NC-SA 2.0)" href="http://www.flickr.com/photos/30914459@N00/183272970">Credit</a>
+	<h3>Key:</h3>
+	<a href="./index.php">Demo App</a>
+	<a href="./what.php">What is this?</a>
+	<a href="./code.php">View Code</a>
+	<a href="http://twitter.com/jaclark" class="twitter">@jaclark</a>
+	<a title="Robot Joe by Simon Abrams (CC BY-NC-SA 2.0)" href="http://www.flickr.com/photos/30914459@N00/183272970">Credit</a>
 </aside>
 </body>
 </html>
