@@ -17,6 +17,7 @@ $customScript[0] = 'none';
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title><?php echo($pageTitle); ?> - jason a. clark</title>
+<link rel="alternate" href="http://www.lib.montana.edu/~jason/files/getsemantic/" hreflang="en-us" />
 <link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit" />
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
