@@ -17,7 +17,8 @@ $customScript[0] = 'none';
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title><?php echo($pageTitle); ?> - jason a. clark</title>
-<link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit" />
+<link rel="alternate" href="http://www.lib.montana.edu/~jason/files/getsemantic/" hreflang="en-us"/>
+<link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit"/>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 <?php if ($customCSS != 'none') {
@@ -56,10 +57,10 @@ if ($customScript[0] != 'none') {
   $type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedNamedEntities';
   //set default value for query
   $q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
-	//set default value for output format
-	$format = isset($_GET['format']) ? $_GET['format'] : 'json';
-	//set default number of results
-	//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
+  //set default value for output format
+  $format = isset($_GET['format']) ? $_GET['format'] : 'json';
+  //set default number of results
+  //$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
 
 if (is_null($q)): //if there's no query, show form and allow the user to search
 ?>
