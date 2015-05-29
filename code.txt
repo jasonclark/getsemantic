@@ -23,7 +23,6 @@ $customScript[0] = 'none';
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 <?php if ($customCSS != 'none') {
 ?>
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700">
 <link rel="stylesheet" href="<?php echo dirname($_SERVER['PHP_SELF']); ?>/meta/styles/<?php echo $customCSS; ?>">
 <?php
 }
