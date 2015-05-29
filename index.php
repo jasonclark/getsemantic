@@ -23,7 +23,6 @@ $customScript[0] = 'none';
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 <?php if ($customCSS != 'none') {
 ?>
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700">
 <link rel="stylesheet" href="<?php echo dirname($_SERVER['PHP_SELF']); ?>/meta/styles/<?php echo $customCSS; ?>">
 <?php
 }
@@ -57,10 +56,10 @@ if ($customScript[0] != 'none') {
   $type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedNamedEntities';
   //set default value for query
   $q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
-  //set default value for output format
-  $format = isset($_GET['format']) ? $_GET['format'] : 'json';
-  //set default number of results
-  //$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
+	//set default value for output format
+	$format = isset($_GET['format']) ? $_GET['format'] : 'json';
+	//set default number of results
+	//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
 
 if (is_null($q)): //if there's no query, show form and allow the user to search
 ?>
