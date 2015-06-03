@@ -17,6 +17,14 @@ $customScript[0] = 'none';
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title><?php echo($pageTitle); ?> - jason a. clark</title>
+<meta name="description" content="GetSemantic: Get linked data entities and topics from a URL using the Alchemy Term Extraction API" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="http://www.jasonclark.info" />
+<meta name="twitter:creator" content="@jaclark" />
+<meta property="og:url" content="http://www.lib.montana.edu/~jason/files/getsemantic/" />
+<meta property="og:title" content="GetSemantic" />
+<meta property="og:description" content="Get linked data entities and topics from a URL using the Alchemy Term Extraction API."/>
+<meta property="og:image" content="http://www.lib.montana.edu/beta/bookme/meta/img/getsemantic-share-default.png" />
 <link rel="alternate" href="http://www.lib.montana.edu/~jason/files/getsemantic/" hreflang="en-us"/>
 <link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit"/>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
