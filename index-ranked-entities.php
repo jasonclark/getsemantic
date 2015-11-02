@@ -87,7 +87,7 @@ else: //query API and display results
 $apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
 
 //diagnostic to show actual API request - REMOVE when in production
-echo '<!--'.$apiURL.'-->';
+//echo '<!--'.$apiURL.'-->';
 
 //call API and get data
 $request = file_get_contents($apiURL);
@@ -101,11 +101,11 @@ $data = json_decode($request,true);
 
     //parse elements and display as html
     if ($data['status'] == 'OK') {
-    echo '<h2 class="mainHeading">Mmmmm... Semantic Yumminess</h2>'."\n";
+    echo '<p>Mmmmm... Semantic Yumminess</p>'."\n";
     	//if (!is_null($data->entities)) {
     	if (isset($data['entities'])) {
-    	echo '<h3>Ranked Entities</h3>'."\n";
-			foreach ($data['entities'] as $entity) {
+    	echo '<h2>Ranked Entities</h2>'."\n";
+		foreach ($data['entities'] as $entity) {
         	echo '<p><strong>'.$entity['text'].'</strong></p>'."\n";
 					echo '<ul>'."\n";
 					//check for URL at schema.org; print link if URL exists
@@ -132,8 +132,8 @@ $data = json_decode($request,true);
 		echo '<p>Source: <a href="'.htmlentities(strip_tags($q)).'">'.htmlentities(strip_tags($q)).'</a></p>'."\n";
 		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	} else {
-		echo '<h2 class="mainHeading">Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</h2>'."\n";
-    echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
+		echo '<p>Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</p>'."\n";
+		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	}
 //end submit isset if statement on line 73
 endif;
