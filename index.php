@@ -1,5 +1,5 @@
 <?php
-//Testing Term Extraction API using Alchemy API
+//Testing Concept Tagging  using Alchemy API
 //http://www.alchemyapi.com/api/
 
 //assign value for title of page
@@ -24,7 +24,7 @@ $customScript[0] = 'none';
 <meta property="og:url" content="http://www.lib.montana.edu/~jason/files/getsemantic/" />
 <meta property="og:title" content="GetSemantic" />
 <meta property="og:description" content="Get linked data entities and topics from a URL using the Alchemy Term Extraction API."/>
-<meta property="og:image" content="http://www.lib.montana.edu/beta/bookme/meta/img/getsemantic-share-default.png" />
+<meta property="og:image" content="http://www.lib.montana.edu/~jason/files/getsemantic/meta/img/getsemantic-share-default.png" />
 <link rel="alternate" href="http://www.lib.montana.edu/~jason/files/getsemantic/" hreflang="en-us"/>
 <link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit"/>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -53,87 +53,110 @@ if ($customScript[0] != 'none') {
 <div class="main">
 <main role="main">
 <?php
-  //turn on full error reports for development - REMOVE when in production
-  //error_reporting(E_ALL);
+//turn on full error reports for development - REMOVE when in production
+//error_reporting(E_ALL);
 
-  //set default value for developer key
-  $key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
-  //set base url for API
-  $alchemyBase = 'http://access.alchemyapi.com/calls/url/';
-  //set default value for type of query
-  $type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedNamedEntities';
-  //set default value for query
-  $q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
-	//set default value for output format
-	$format = isset($_GET['format']) ? $_GET['format'] : 'json';
-	//set default number of results
-	//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
+//set default value for developer key
+$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
+//set base url for API
+$alchemyBase = 'http://gateway-a.watsonplatform.net/calls/url/';
+//set default value for type of query
+$type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedConcepts';
+//set default value for query
+$q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
+//set default value for output format
+$format = isset($_GET['format']) ? $_GET['format'] : 'json';
+//set default number of results
+//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
 
 if (is_null($q)): //if there's no query, show form and allow the user to search
 ?>
 
 	<form method="get" action="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>">
 	<fieldset>
-	<label class="hidden" for="q">Enter URL to get Content Analysis and Terms:</label>
-	<input type="text" name="q" id="q" placeholder="Feed me a URL" autofocus />
-	<button type="submit" class="button">Get Analysis</button>
+		<label class="hidden" for="q">Enter URL to get Content Analysis and Terms:</label>
+		<input type="text" name="q" id="q" placeholder="Feed me a URL" autofocus />
 	</fieldset>
+	<button type="submit" class="button">Get Analysis</button>
 	</form>
 
 <?php
 else: //query API and display results
 
-  //build request value
-	$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
+//build request value
+$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
 
-  //diagnostic to show actual API request - REMOVE when in production
-  //echo '<!--'.$apiURL.'-->';
+//diagnostic to show actual API request - REMOVE when in production
+echo '<!--'.$apiURL.'-->';
 
-  //call API and get data
-  $request = file_get_contents($apiURL);
-  //create json object(s) out of API response; set to "true" to turn response into an array
-  $data = json_decode($request,true);
+//call API and get data
+$request = file_get_contents($apiURL);
+//create json object(s) out of API response; set to "true" to turn response into an array
+$data = json_decode($request,true);
 
-	//diagnostic to show array returned from API request - REMOVE when in production
-	//echo '<pre>';
-	//print_r(var_dump($data));
-	//echo '</pre>';
+//diagnostic to show array returned from API request - REMOVE when in production
+//echo '<pre>';
+//print_r(var_dump($data));
+//echo '</pre>';
 
     //parse elements and display as html
     if ($data['status'] == 'OK') {
-    echo '<h2 class="mainHeading">Mmmmm... Semantic Yumminess</h2>'."\n";
+    echo '<p>Mmmmm... Semantic Yumminess</p>'."\n";
     	//if (!is_null($data->entities)) {
-    	if (isset($data['entities'])) {
-    	echo '<h3>Ranked Entities</h3>'."\n";
-			foreach ($data['entities'] as $entity) {
-        	echo '<p><strong>'.$entity['text'].'</strong></p>'."\n";
-					echo '<ul>'."\n";
-					//check for URL at schema.org; print link if URL exists
-					$schemaType = 'http://schema.org/'.$entity['type'];
-					if (@file_get_contents($schemaType)) {
-						echo '<li>type: <a title="look up '.$entity['type'].' type at schema.org" href="http://schema.org/'.$entity['type'].'">'.$entity['type'].'</a></li>'."\n";
-					} else {
-						echo '<li>type: '.$entity['type'].'</li>'."\n";
+    	if (isset($data['concepts'])) {
+    	echo '<h2 class=""mainHeading">Ranked Entities</h2>'."\n";
+                echo '<dl>'."\n";
+		foreach ($data['concepts'] as $entity) {
+        		echo '<dt><strong>'.$entity['text'].'</strong></dt>'."\n";
+			echo '<dd>relevance: '.$entity['relevance'].'</dd>'."\n";
+			echo '<dd>concepts & linked data resources:'."\n";
+				echo '<ul>'."\n";				
+					if (isset($entity['geo'])) {
+						echo '<li>coordinates: '.$entity['geo'].'</li>'."\n";
 					}
-        	echo '<li>relevance: '.$entity['relevance'].'</li>'."\n";
-        	echo '<li>count: '.$entity['count'].'</li>'."\n";
-					if (isset($entity['disambiguated'])) {
-        		echo '<li>linked data resources:'."\n";
-        		echo '<ul>'."\n";
-						echo '<li><a href="'.$entity['disambiguated']['dbpedia'].'">'.$entity['disambiguated']['dbpedia'].'</a></li>'."\n";
-						echo '<li><a href="'.$entity['disambiguated']['freebase'].'">'.$entity['disambiguated']['freebase'].'</a></li>'."\n";
-        		echo '</ul>'."\n";
-        		echo '</li>'."\n";
-    			}
-					echo '</ul>'."\n";
-			}
+					if (isset($entity['website'])) {
+						echo '<li>website: <a href="'.$entity['website'].'">'.$entity['website'].'</a></li>'."\n";
+					}  
+					if (isset($entity['dbpedia'])) {
+						echo '<li><a href="'.$entity['dbpedia'].'">'.$entity['dbpedia'].'</a></li>'."\n";
+					}  
+					if (isset($entity['freebase'])) {
+						echo '<li><a href="'.$entity['freebase'].'">'.$entity['freebase'].'</a></li>'."\n";
+					}
+					if (isset($entity['geonames'])) {
+						echo '<li><a href="'.$entity['geonames'].'">'.$entity['geonames'].'</a></li>'."\n";
+					}  
+					if (isset($entity['opencyc'])) {
+						echo '<li><a href="'.$entity['opencyc'].'">'.$entity['opencyc'].'</a></li>'."\n";
+					}
+					if (isset($entity['yago'])) {
+						echo '<li><a href="'.$entity['yago'].'">'.$entity['yago'].'</a></li>'."\n";
+					}
+				echo '</ul>'."\n";
+				echo '</dd>'."\n";
 		}
+		echo '</dl>'."\n";
+	}
+        if (isset($data['keywords'])) {
+        echo '<h2 class=""mainHeading">Ranked Keywords</h2>'."\n";
+                echo '<dl>'."\n";
+                foreach ($data['keywords'] as $entity) {
+                        echo '<dt><strong>'.$entity['text'].'</strong></dt>'."\n";
+                        echo '<dd>relevance: '.$entity['relevance'].'</dd>'."\n";
+                }
+                echo '</dl>'."\n";
+        }
+	if (isset($data['keywords'])) {
+		echo '<p><a href="'.htmlentities(strip_tags(basename(__FILE__))).'">Check for Ranked Entities</a></p>'."\n";
+	} else {
+		echo '<p><a href="'.htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'&type=URLGetRankedKeywords">Check for Ranked Keywords</a></p>'."\n";
+	}
 		echo '<p><a href="http://'.$_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'">Permalink</a></p>'."\n";
 		echo '<p>Source: <a href="'.htmlentities(strip_tags($q)).'">'.htmlentities(strip_tags($q)).'</a></p>'."\n";
 		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	} else {
-		echo '<h2 class="mainHeading">Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</h2>'."\n";
-    echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
+		echo '<p>Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</p>'."\n";
+		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	}
 //end submit isset if statement on line 73
 endif;
