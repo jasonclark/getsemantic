@@ -1,5 +1,5 @@
 <?php
-//Testing Concept Tagging  using Alchemy API
+//Testing Concept Tagging using Alchemy API
 //http://www.alchemyapi.com/api/
 
 //assign value for title of page
@@ -87,7 +87,7 @@ else: //query API and display results
 $apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
 
 //diagnostic to show actual API request - REMOVE when in production
-echo '<!--'.$apiURL.'-->';
+//echo '<!--'.$apiURL.'-->';
 
 //call API and get data
 $request = file_get_contents($apiURL);
@@ -133,7 +133,7 @@ $data = json_decode($request,true);
 						echo '<li><a href="'.$entity['yago'].'">'.$entity['yago'].'</a></li>'."\n";
 					}
 				echo '</ul>'."\n";
-				echo '</dd>'."\n";
+			echo '</dd>'."\n";
 		}
 		echo '</dl>'."\n";
 	}
