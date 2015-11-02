@@ -33,6 +33,10 @@ input:focus,button:focus{outline:none;}
 .hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
 .expand {background:url("../img/expand.gif") 0 50% no-repeat;padding-left:16px;}
 .refresh {background:url("../img/refresh.gif") 0 50% no-repeat;padding-left:18px;}
+:focus::-webkit-input-placeholder {color:transparent;}
+:focus:-moz-placeholder {color:transparent;}
+:focus::-moz-placeholder {color:transparent;}
+:focus:-ms-input-placeholder {color:transparent;}
 
 @media screen and (max-width:768px) {
  body{padding:20px;}
