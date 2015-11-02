@@ -147,7 +147,7 @@ $data = json_decode($request,true);
                 echo '</dl>'."\n";
         }
 	if (isset($data['keywords'])) {
-		echo '<p><a href="'.htmlentities(strip_tags(basename(__FILE__))).'">Check for Ranked Entities</a></p>'."\n";
+		echo '<p><a href="'.htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)).'">Check for Ranked Entities</a></p>'."\n";
 	} else {
 		echo '<p><a href="'.htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'&type=URLGetRankedKeywords">Check for Ranked Keywords</a></p>'."\n";
 	}
