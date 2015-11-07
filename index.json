@@ -1,0 +1,84 @@
+<?php
+//set header for json file and allow cross-domain requests
+header('Content-type: application/json');
+header("access-control-allow-origin: *");
+
+//set default value for developer key
+$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
+//set base url for API
+$alchemyBase = 'http://gateway-a.watsonplatform.net/calls/url/';
+//set default value for type of query
+$type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedConcepts';
+//set default value for query
+$q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
+//set default value for output format
+$format = isset($_GET['format']) ? $_GET['format'] : 'json';
+//set default number of results
+//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
+
+?>
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org/",
+	"@type": "DataFeed",
+<?php
+if (is_null($q)): //if there's no query, show empty json response
+?>
+	"name": "getSemantic - empty resultset",
+	"dateModified": "<?php echo date("c"); ?>",
+	"dataFeedElement": [
+		{
+			"@type": "DataFeedItem",
+			"dateCreated": "<?php echo date("c"); ?>",
+			"item": {
+				"@type": "CreativeWork",
+				"name": "Not available",
+				"sameAs": "Not available"
+			}
+		}	
+	]
+}
+<?php
+else:
+
+if ($data['status'] == 'OK') {
+?>
+        "name": "getSemantic - <?php echo $type; ?>",
+        "dateModified": "<?php echo date("c"); ?>",
+        "dataFeedElement": [
+<?php
+	if (isset($data['concepts'])) {
+?>
+        	{	
+                	"@type": "DataFeedItem",
+                	"dateCreated": "<?php echo date("c"); ?>",
+                	"item": {
+                        	"@type": "CreativeWork",
+                        	"name": "Not available",
+                        	"sameAs": "Not available"
+                	}
+        	}
+<?php
+	}//end check for concepts
+
+	if (isset($data['keywords'])) {
+?>
+        	{
+                	"@type": "DataFeedItem",
+                	"dateCreated": "<?php echo date("c"); ?>",
+                	"item": {
+                        	"@type": "CreativeWork",
+                        	"name": "Not available",
+                        	"sameAs": "Not available"
+                	}
+        	}
+<?php
+	}//end check for keywords
+}//end check for status - success in API request
+?>
+	]
+}
+<?php
+endif;
+?>
+</script>
