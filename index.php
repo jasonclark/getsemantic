@@ -1,5 +1,5 @@
 <?php
-//Testing Concept Tagging using Alchemy API
+//Testing Concept Tagging  using Alchemy API
 //http://www.alchemyapi.com/api/
 
 //assign value for title of page
@@ -18,13 +18,14 @@ $customScript[0] = 'none';
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title><?php echo($pageTitle); ?> - jason a. clark</title>
 <meta name="description" content="GetSemantic: Get linked data entities and topics from a URL using the Alchemy Term Extraction API" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="http://www.jasonclark.info" />
-<meta name="twitter:creator" content="@jaclark" />
-<meta property="og:url" content="http://www.lib.montana.edu/~jason/files/getsemantic/" />
 <meta property="og:title" content="GetSemantic" />
 <meta property="og:description" content="Get linked data entities and topics from a URL using the Alchemy Term Extraction API."/>
 <meta property="og:image" content="http://www.lib.montana.edu/~jason/files/getsemantic/meta/img/getsemantic-share-default.png" />
+<meta property="og:url" content="http://www.lib.montana.edu/~jason/files/getsemantic/" />
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="http://www.jasonclark.info" />
+<meta name="twitter:creator" content="@jaclark" />
 <link rel="alternate" href="http://www.lib.montana.edu/~jason/files/getsemantic/" hreflang="en-us"/>
 <link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit"/>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -57,7 +58,7 @@ if ($customScript[0] != 'none') {
 //error_reporting(E_ALL);
 
 //set default value for developer key
-$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
+$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'fb3c6b13855b1b894ddd969da8a007b520bf53a0';
 //set base url for API
 $alchemyBase = 'http://gateway-a.watsonplatform.net/calls/url/';
 //set default value for type of query
@@ -77,7 +78,7 @@ if (is_null($q)): //if there's no query, show form and allow the user to search
 		<label class="hidden" for="q">Enter URL to get Content Analysis and Terms:</label>
 		<input type="text" name="q" id="q" placeholder="Feed me a URL" />
 		<button type="submit" class="button">Get Analysis</button>
-	</fieldset>	
+	</fieldset>
 	</form>
 
 <?php
