@@ -41,6 +41,17 @@ if (is_null($q)): //if there's no query, show empty json response
 <?php
 else:
 
+//build request value
+$apiURL = $alchemyBase.$type.'?apikey='.$key.'&outputMode='.$format.'&url='.$q.'';
+
+//diagnostic to show actual API request - REMOVE when in production
+//echo '<!--'.$apiURL.'-->';
+
+//call API and get data
+$request = file_get_contents($apiURL);
+//create json object(s) out of API response; set to "true" to turn response into an array
+$data = json_decode($request,true);
+
 if ($data['status'] == 'OK') {
 ?>
         "name": "getSemantic - <?php echo $type; ?>",
@@ -48,31 +59,72 @@ if ($data['status'] == 'OK') {
         "dataFeedElement": [
 <?php
 	if (isset($data['concepts'])) {
+                foreach ($data['concepts'] as $entity) {
 ?>
         	{	
                 	"@type": "DataFeedItem",
                 	"dateCreated": "<?php echo date("c"); ?>",
                 	"item": {
                         	"@type": "CreativeWork",
-                        	"name": "Not available",
-                        	"sameAs": "Not available"
+                        	"name": "<?php echo $entity['text']; ?>",
+                                "aggregateRating": "<?php echo $entity['relevance']; ?>",
+<?php
+                                if (isset($entity['geo'])) {
+?>
+                                "contentLocation": "<?php echo $entity['geo']; ?>",
+<?php
+                                }
+                                if (isset($entity['website'])) {
+?>
+                                "url": "<?php echo $entity['geo']; ?>",
+<?php
+                                }  
+                                if (isset($entity['dbpedia'])) {
+?>
+                                "sameAs": "<?php echo $entity['dbpedia']; ?>",
+<?php
+                                }  
+                                if (isset($entity['freebase'])) {
+?>
+                                "sameAs": "<?php echo $entity['freebase']; ?>",
+<?php
+                                }
+                                if (isset($entity['geonames'])) {
+?>
+                                "sameAs": "<?php echo $entity['geonames']; ?>",
+<?php
+                                }  
+                                if (isset($entity['opencyc'])) {
+?>
+                                "sameAs": "<?php echo $entity['opencyc']; ?>",
+<?php
+                                }
+                                if (isset($entity['yago'])) {
+?>
+                                "sameAs": "<?php echo $entity['yago']; ?>",
+<?php
+                                }
+?>
                 	}
         	}
 <?php
+                }//end concepts loop
 	}//end check for concepts
 
 	if (isset($data['keywords'])) {
+                foreach ($data['keywords'] as $entity) {
 ?>
         	{
                 	"@type": "DataFeedItem",
                 	"dateCreated": "<?php echo date("c"); ?>",
                 	"item": {
                         	"@type": "CreativeWork",
-                        	"name": "Not available",
-                        	"sameAs": "Not available"
+                                "name": "<?php echo $entity['text']; ?>",
+                                "aggregateRating": "<?php echo $entity['relevance']; ?>"
                 	}
         	}
 <?php
+                }//end keywords loop
 	}//end check for keywords
 }//end check for status - success in API request
 ?>
