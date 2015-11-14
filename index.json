@@ -106,7 +106,7 @@ if ($data['status'] == 'OK') {
                                 }
 ?>
                 	}
-        	}
+        	},
 <?php
                 }//end concepts loop
 	}//end check for concepts
@@ -122,7 +122,7 @@ if ($data['status'] == 'OK') {
                                 "name": "<?php echo $entity['text']; ?>",
                                 "aggregateRating": "<?php echo $entity['relevance']; ?>"
                 	}
-        	}
+        	},
 <?php
                 }//end keywords loop
 	}//end check for keywords
