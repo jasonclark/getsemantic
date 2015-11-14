@@ -2,6 +2,9 @@
 //Testing Concept Tagging  using Alchemy API
 //http://www.alchemyapi.com/api/
 
+//turn on full error reports for development - REMOVE when in production
+//error_reporting(E_ALL);
+
 //assign value for title of page
 $pageTitle = 'getSEMantic [beta]';
 $subTitle = 'jason a. clark';
@@ -9,6 +12,18 @@ $subTitle = 'jason a. clark';
 $customCSS = 'master.css';
 //create an array with filepaths for multiple page scripts - default is meta/scripts/global.js
 $customScript[0] = 'none';
+//set default value for developer key
+$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'ADD-YOUR-ALCHEMY-API-KEY-HERE';
+//set base url for API
+$alchemyBase = 'http://gateway-a.watsonplatform.net/calls/url/';
+//set default value for type of query
+$type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedConcepts';
+//set default value for query
+$q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
+//set default value for output format
+$format = isset($_GET['format']) ? $_GET['format'] : 'json';
+//set default number of results
+//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,6 +43,18 @@ $customScript[0] = 'none';
 <meta name="twitter:creator" content="@jaclark"/>
 <link rel="alternate" href="http://www.lib.montana.edu/~jason/files/getsemantic/" hreflang="en-us"/>
 <link rel="alternate" type="application/rss+xml" title="diginit - jason clark" href="http://feeds.feedburner.com/diginit"/>
+<?php
+if (!is_null($q) && $type == 'URLGetRankedConcepts') {
+?>
+<link rel="alternate" type="application/ld+json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>" title="Ranked Entities (json-ld)"/>
+<?php
+}
+if (!is_null($q) && $type == 'URLGetRankedKeywords') {
+?>
+<link rel="alternate" type="application/ld+json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>&type=URLGetRankedKeywords" title="Ranked Keywords (json-ld)"/>
+<?php
+}
+?>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 <?php if ($customCSS != 'none') {
@@ -54,22 +81,6 @@ if ($customScript[0] != 'none') {
 <div class="main">
 <main role="main">
 <?php
-//turn on full error reports for development - REMOVE when in production
-//error_reporting(E_ALL);
-
-//set default value for developer key
-$key = isset($_GET['key']) ? htmlentities(strip_tags($_GET['key'])) : 'fb3c6b13855b1b894ddd969da8a007b520bf53a0';
-//set base url for API
-$alchemyBase = 'http://gateway-a.watsonplatform.net/calls/url/';
-//set default value for type of query
-$type = isset($_GET['type']) ? htmlentities(strip_tags($_GET['type'])) : 'URLGetRankedConcepts';
-//set default value for query
-$q = isset($_GET['q']) ? htmlentities(strip_tags($_GET['q'])) : null;
-//set default value for output format
-$format = isset($_GET['format']) ? $_GET['format'] : 'json';
-//set default number of results
-//$limit = isset($_GET['limit']) ? strip_tags((int)$_GET['limit']) : '50';
-
 if (is_null($q)): //if there's no query, show form and allow the user to search
 ?>
 
@@ -148,12 +159,12 @@ $data = json_decode($request,true);
                 echo '</dl>'."\n";
         }
 	if (isset($data['keywords'])) {
-		echo '<p><a href="'.htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)).'">Check for Ranked Entities</a></p>'."\n";
+		echo '<p><a href="'.htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)).'">Get Ranked Entities</a> | <a href="./index.json?q='.htmlentities(strip_tags($q)).'">Get Ranked Entities (json-ld)</a></p>'."\n";
 	} else {
-		echo '<p><a href="'.htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'&type=URLGetRankedKeywords">Check for Ranked Keywords</a></p>'."\n";
+		echo '<p><a href="'.htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'&type=URLGetRankedKeywords">Get Ranked Keywords</a> | <a href="./index.json?q='.htmlentities(strip_tags($q)).'&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a></p>'."\n";
 	}
 		echo '<p><a href="http://'.$_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'">Permalink</a></p>'."\n";
-		echo '<p>Source: <a href="'.htmlentities(strip_tags($q)).'">'.htmlentities(strip_tags($q)).'</a></p>'."\n";
+		echo '<p><a href="'.htmlentities(strip_tags($q)).'">Source</a></p>'."\n";
 		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
 	} else {
 		echo '<p>Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</p>'."\n";
