@@ -111,64 +111,101 @@ $data = json_decode($request,true);
 //print_r(var_dump($data));
 //echo '</pre>';
 
-    //parse elements and display as html
-    if ($data['status'] == 'OK') {
-    echo '<p>Mmmmm... Semantic Yumminess</p>'."\n";
-    	//if (!is_null($data->entities)) {
-    	if (isset($data['concepts'])) {
-    	echo '<h2 class=""mainHeading">Ranked Entities</h2>'."\n";
-                echo '<dl>'."\n";
+	//parse elements and display as html
+	if ($data['status'] == 'OK') {
+?>    
+	<p>Mmmmm... Semantic Yumminess</p>
+<?php    	
+	if (isset($data['concepts'])) {
+?>
+	<h2 class="mainHeading">Ranked Entities</h2>
+		<dl>
+<?php
 		foreach ($data['concepts'] as $entity) {
-        		echo '<dt><strong>'.$entity['text'].'</strong></dt>'."\n";
-			echo '<dd>relevance: '.$entity['relevance'].'</dd>'."\n";
-			echo '<dd>concepts & linked data resources:'."\n";
-				echo '<ul>'."\n";				
-					if (isset($entity['geo'])) {
-						echo '<li>coordinates: '.$entity['geo'].'</li>'."\n";
-					}
-					if (isset($entity['website'])) {
-						echo '<li>website: <a href="'.$entity['website'].'">'.$entity['website'].'</a></li>'."\n";
-					}  
-					if (isset($entity['dbpedia'])) {
-						echo '<li><a href="'.$entity['dbpedia'].'">'.$entity['dbpedia'].'</a></li>'."\n";
-					}  
-					if (isset($entity['freebase'])) {
-						echo '<li><a href="'.$entity['freebase'].'">'.$entity['freebase'].'</a></li>'."\n";
-					}
-					if (isset($entity['geonames'])) {
-						echo '<li><a href="'.$entity['geonames'].'">'.$entity['geonames'].'</a></li>'."\n";
-					}  
-					if (isset($entity['opencyc'])) {
-						echo '<li><a href="'.$entity['opencyc'].'">'.$entity['opencyc'].'</a></li>'."\n";
-					}
-					if (isset($entity['yago'])) {
-						echo '<li><a href="'.$entity['yago'].'">'.$entity['yago'].'</a></li>'."\n";
-					}
-				echo '</ul>'."\n";
-			echo '</dd>'."\n";
+?>
+			<dt><strong><?php echo $entity['text']; ?></strong></dt>
+			<dd>relevance: <?php echo $entity['relevance']; ?></dd>
+			<dd>concepts & linked data resources:
+				<ul>
+<?php
+				if (isset($entity['geo'])) {
+?>
+					<li>coordinates: <?php echo $entity['geo']; ?></li>
+<?php
+				}
+				if (isset($entity['website'])) {
+?>
+					<li>website: <a href="<?php echo $entity['website']; ?>"><?php echo $entity['website']; ?></a></li>
+<?php
+}
+				if (isset($entity['dbpedia'])) {
+?>
+					<li><a href="<?php echo $entity['dbpedia']; ?>"><?php echo $entity['dbpedia']; ?></a></li>
+<?php
+				}
+				if (isset($entity['freebase'])) {
+?>
+					<li><a href="<?php echo $entity['freebase']; ?>"><?php echo $entity['freebase']; ?></a></li>
+<?php
+				}
+				if (isset($entity['geonames'])) {
+?>
+					<li><a href="<?php echo $entity['geonames']; ?>"><?php echo $entity['geonames']; ?></a></li>
+<?php
+}
+				if (isset($entity['opencyc'])) {
+?>
+					<li><a href="<?php echo $entity['opencyc']; ?>"><?php echo $entity['opencyc']; ?></a></li>
+<?php
+				}
+				if (isset($entity['yago'])) {
+?>
+					<li><a href="<?php echo $entity['yago']; ?>"><?php echo $entity['yago']; ?></a></li>
+<?php
+				}
+?>
+				</ul>
+			</dd>
+<?php
 		}
-		echo '</dl>'."\n";
+?>
+		</dl>
+<?php
 	}
-        if (isset($data['keywords'])) {
-        echo '<h2 class=""mainHeading">Ranked Keywords</h2>'."\n";
-                echo '<dl>'."\n";
-                foreach ($data['keywords'] as $entity) {
-                        echo '<dt><strong>'.$entity['text'].'</strong></dt>'."\n";
-                        echo '<dd>relevance: '.$entity['relevance'].'</dd>'."\n";
-                }
-                echo '</dl>'."\n";
-        }
 	if (isset($data['keywords'])) {
-		echo '<p><a href="'.htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)).'">Get Ranked Entities</a> | <a href="./index.json?q='.htmlentities(strip_tags($q)).'">Get Ranked Entities (json-ld)</a></p>'."\n";
+?>
+	<h2 class="mainHeading">Ranked Keywords</h2>
+		<dl>
+<?php
+		foreach ($data['keywords'] as $entity) {
+?>
+			<dt><strong><?php echo $entity['text']; ?></strong></dt>
+			<dd>relevance: <?php echo $entity['relevance']; ?></dd>
+<?php
+		}
+?>
+		</dl>
+<?php
+	}	
+	if (isset($data['keywords'])) {
+?>
+		<p><a href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities</a> | <a href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a></p>
+<?php
 	} else {
-		echo '<p><a href="'.htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'&type=URLGetRankedKeywords">Get Ranked Keywords</a> | <a href="./index.json?q='.htmlentities(strip_tags($q)).'&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a></p>'."\n";
+?>
+		<p><a href="<?php echo htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>&type=URLGetRankedKeywords">Get Ranked Keywords</a> | <a href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a></p>
+<?php
 	}
-		echo '<p><a href="http://'.$_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])).'">Permalink</a></p>'."\n";
-		echo '<p><a href="'.htmlentities(strip_tags($q)).'">Source</a></p>'."\n";
-		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
+?>
+		<p><a href="http://<?php echo $_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>">Permalink</a></p>
+		<p><a href="<?php echo htmlentities(strip_tags($q)); ?>">Source</a></p>
+		<p class="control"><a href="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>" class="refresh">Reset</a></p>
+<?php	
 	} else {
-		echo '<p>Bummer. Empty Belly... <br />No results for <strong>'.$q.'</strong>.</p>'."\n";
-		echo '<p class="control"><a href="'.htmlentities(strip_tags(basename(__FILE__))).'" class="refresh">Reset</a></p>'."\n";
+?>
+		<p>Bummer. Empty Belly... <br />No results for <strong><?php echo $q; ?></strong>.</p>
+		<p class="control"><a href="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>" class="refresh">Reset</a></p>
+<?php
 	}
 //end submit isset if statement on line 73
 endif;
