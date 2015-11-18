@@ -24,7 +24,7 @@ $format = isset($_GET['format']) ? $_GET['format'] : 'json';
 <?php
 if (is_null($q)): //if there's no query, show empty json response
 ?>
-	"name": "getSemantic - empty resultset",
+	"name": "getSemantic - empty resultset - no source file",
 	"dateModified": "<?php echo date("c"); ?>",
 	"dataFeedElement": [
 		{
@@ -54,7 +54,7 @@ $data = json_decode($request,true);
 
 if ($data['status'] == 'OK') {
 ?>
-        "name": "getSemantic - <?php echo $type; ?>",
+        "name": "getSemantic - <?php echo $type; ?> for <?php echo $q; ?>",
         "dateModified": "<?php echo date("c"); ?>",
         "dataFeedElement": [
 <?php
