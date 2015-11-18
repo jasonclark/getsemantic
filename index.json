@@ -67,7 +67,7 @@ if ($data['status'] == 'OK') {
                 	"item": {
                         	"@type": "CreativeWork",
                         	"name": "<?php echo $entity['text']; ?>",
-                                "aggregateRating": "<?php echo $entity['relevance']; ?>",
+                                "contentRating": "<?php echo $entity['relevance']; ?>",
 <?php
                                 if (isset($entity['geo'])) {
 ?>
@@ -101,12 +101,12 @@ if ($data['status'] == 'OK') {
                                 }
                                 if (isset($entity['yago'])) {
 ?>
-                                "sameAs": "<?php echo $entity['yago']; ?>",
+				"sameAs": "<?php echo $entity['yago']; ?>"
 <?php
                                 }
 ?>
                 	}
-        	},
+		}<?php if ($entity === end($data['concepts'])) { echo ''."\n"; } else { echo ','."\n"; } ?>
 <?php
                 }//end concepts loop
 	}//end check for concepts
@@ -120,9 +120,9 @@ if ($data['status'] == 'OK') {
                 	"item": {
                         	"@type": "CreativeWork",
                                 "name": "<?php echo $entity['text']; ?>",
-                                "aggregateRating": "<?php echo $entity['relevance']; ?>"
+                                "contentRating": "<?php echo $entity['relevance']; ?>"
                 	}
-        	},
+		}<?php if ($entity === end($data['keywords'])) { echo ''."\n"; } else { echo ','."\n"; } ?>
 <?php
                 }//end keywords loop
 	}//end check for keywords
