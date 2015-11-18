@@ -37,6 +37,8 @@ input:focus,button:focus{outline:none;}
 :focus:-moz-placeholder {color:transparent;}
 :focus::-moz-placeholder {color:transparent;}
 :focus:-ms-input-placeholder {color:transparent;}
+.html:before {content: "\02635\ ";}
+.json:before {content: "\02635\ ";}
 
 @media screen and (max-width:768px) {
  body{padding:20px;}
