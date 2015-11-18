@@ -30,15 +30,18 @@ a:hover::after {height: 2px;opacity: 1;-webkit-transform: translateY(-3px);-moz-
 .button:active {position:relative;top:1px;}
 input{border:none;border-radius:5px;-webkit-box-shadow:0 0 4px #666 inset;-moz-box-shadow:0 0 4px #666 inset;box-shadow:0 0 4px #666 inset;height:45px;line-height:25px;width:60%;text-indent:7px;}
 input:focus,button:focus{outline:none;}
-.hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
 .expand {background:url("../img/expand.gif") 0 50% no-repeat;padding-left:16px;}
+.hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
+.html:before {content: "\02636\ ";}
+.json:before {content: "\02637\ ";}
+.nav a {margin-right:.35em;}
+.nav a:last-child {margin-right:0;}
+.permalink:before {content: "\0221E\ ";}
 .refresh {background:url("../img/refresh.gif") 0 50% no-repeat;padding-left:18px;}
 :focus::-webkit-input-placeholder {color:transparent;}
 :focus:-moz-placeholder {color:transparent;}
 :focus::-moz-placeholder {color:transparent;}
 :focus:-ms-input-placeholder {color:transparent;}
-.html:before {content: "\02635\ ";}
-.json:before {content: "\02635\ ";}
 
 @media screen and (max-width:768px) {
  body{padding:20px;}
