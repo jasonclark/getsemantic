@@ -106,7 +106,7 @@ if ($data['status'] == 'OK') {
                                 }
 ?>
                 	}
-		}<?php if ($entity != end($data['concepts'])) { echo ','; } echo "\n"; ?>
+		}<?php if ($entity !== end($data['concepts'])) { echo ','; } echo "\n"; ?>
 <?php
                 }//end concepts loop
 	}//end check for concepts
@@ -122,7 +122,7 @@ if ($data['status'] == 'OK') {
                                 "name": "<?php echo $entity['text']; ?>",
                                 "contentRating": "<?php echo $entity['relevance']; ?>"
                 	}
-		}<?php if ($entity != end($data['keywords'])) { echo ','; } echo "\n"; ?>
+		}<?php if ($entity !== end($data['keywords'])) { echo ','; } echo "\n"; ?>
 <?php
                 }//end keywords loop
 	}//end check for keywords
