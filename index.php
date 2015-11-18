@@ -189,7 +189,7 @@ $data = json_decode($request,true);
 	}	
 	if (isset($data['keywords'])) {
 ?>
-		<p><a href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities</a> | <a href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a></p>
+		<p><a class="html" href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities</a> | <a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a></p>
 <?php
 	} else {
 ?>
