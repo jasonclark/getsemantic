@@ -114,7 +114,7 @@ $data = json_decode($request,true);
 	//parse elements and display as html
 	if ($data['status'] == 'OK') {
 ?>    
-	<p>Mmmmm... Semantic Yumminess</p>
+	<p>Mmmmm... Semantic Yumminess (<a href="<?php echo htmlentities(strip_tags($q)); ?>">Source</a>)</p>
 <?php    	
 	if (isset($data['concepts'])) {
 ?>
@@ -189,16 +189,15 @@ $data = json_decode($request,true);
 	}	
 	if (isset($data['keywords'])) {
 ?>
-		<p><a class="html" href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities</a> | <a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a></p>
+		<p class="nav"><a class="html" href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities (html)</a> <a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a></p>
 <?php
 	} else {
 ?>
-		<p><a href="<?php echo htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>&type=URLGetRankedKeywords">Get Ranked Keywords</a> | <a href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a></p>
+		<p class="nav"><a class="html" href="<?php echo htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>&type=URLGetRankedKeywords">Get Ranked Keywords</a> <a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a></p>
 <?php
 	}
 ?>
-		<p><a href="http://<?php echo $_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>">Permalink</a></p>
-		<p><a href="<?php echo htmlentities(strip_tags($q)); ?>">Source</a></p>
+		<p><a class="permalink" href="http://<?php echo $_SERVER['SERVER_NAME'].htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>">Permalink</a></p>
 		<p class="control"><a href="<?php echo htmlentities(strip_tags(basename(__FILE__))); ?>" class="refresh">Reset</a></p>
 <?php	
 	} else {
