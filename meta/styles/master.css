@@ -2,6 +2,8 @@
 Author:   Jason A. Clark
 Version:  screen,projection,handheld - May 2015
 ----------------------------------------------- */
+html {box-sizing:border-box;}
+*, *:before, *:after {box-sizing:inherit;margin:0;padding:0;}
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0;}
 a{outline:none;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none;display:inline-block;color:#777;position:relative;margin:0;padding:0;}
 body{font-size:small;font:20px/1.6 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;max-width:720px;position:relative;padding:50px;}
@@ -10,7 +12,6 @@ fieldset{border:0;}
 label{display:none;}
 table{font-size:inherit;font:100%;}
 pre,code,kbd,samp,tt{font-family:monospace;font-size:108%;line-height:100%;}
-*,:before,:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0;}
 html{background:url("../img/robot-bg.png") no-repeat fixed bottom;background-position:center center;background-size:cover;color:#666;}
 html ul{margin:1em 0;padding:0 0 0 40px;}
 header{display:block;float:left;width:100%;}
