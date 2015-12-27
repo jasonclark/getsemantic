@@ -189,11 +189,11 @@ $data = json_decode($request,true);
 	}	
 	if (isset($data['keywords'])) {
 ?>
-		<p class="nav"><a class="html" href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities (html)</a> <a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a></p>
+		<p class="nav"><a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a> <a class="html" href="<?php echo htmlentities(strip_tags(basename(__FILE__))).'?q='.htmlentities(strip_tags($q)); ?>">Get Ranked Entities (html)</a></p>
 <?php
 	} else {
 ?>
-		<p class="nav"><a class="html" href="<?php echo htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>&type=URLGetRankedKeywords">Get Ranked Keywords</a> <a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>&type=URLGetRankedKeywords">Get Ranked Keywords (json-ld)</a></p>
+		<p class="nav"><a class="json" href="./index.json?q=<?php echo htmlentities(strip_tags($q)); ?>">Get Ranked Entities (json-ld)</a>  <a class="html" href="<?php echo htmlentities(strip_tags($_SERVER['REQUEST_URI'])); ?>&type=URLGetRankedKeywords">Get Ranked Keywords</a></p>
 <?php
 	}
 ?>
